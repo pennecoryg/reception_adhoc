@@ -1,0 +1,161 @@
+/* Il faut en fait prendre le nom de la balise du fichier html 
+pour laquelle tu veux que le style soit adopté. Donc toutes 
+les choses contenues dans cette balise auront ce style */
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  font-family: Calibri, sans-serif;
+  color: #707173; 
+}
+
+
+
+
+/* Masque à l'origine les 2 barres de recherche et après c'est géré 
+dans le js pour voir ce qu'on affiche en focntion du clique qui sera fait  */
+
+/* Le # cible un id précis. Si on avait mis u ne class toolbar déja ça aurait 
+été unique pour marque et fournisseur (car une class peut être utilisée par 
+plusieurs éléments) et on aurait mis un . au lieu du # */
+
+
+label {
+  margin-right: 20px;
+}
+
+/* Conteneur des listes centré */
+p {
+  display: flex;             /* utilise flexbox pour alignement */
+  font-size: 20px;
+}
+
+/*------------------------------------- Initialisation du style des ID -------------------------------------*/
+
+#header {
+  display: flex;
+  align-items: center;      /* aligne verticalement logo + titre */
+  justify-content: flex-start;
+  width: 100%;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  border-bottom: 4px solid #A1A1A1 ;
+  padding-bottom: 40px;
+}
+
+#secondeLigne {
+  width: 100%;
+  height: 1px;
+  background-color: #A1A1A1;
+  margin-top: 6px;                /* espace entre les deux lignes */
+  margin-bottom: 20px;
+}
+
+#logo {
+  height: 50px;             /* ajuste la taille du logo */
+  margin-right: 40px;       /* espace entre logo et titre */
+  padding-right: 40px;                    /* espace avant la barre */
+  border-right: 2px solid #A1A1A1;        /* barre verticale fine */
+}
+
+#header h1 {
+  margin: 0;                /* enlève la marge par défaut du h1 */
+}
+
+/*-------------------------------------------- Ligne rechercher --------------------------------------------*/
+
+#ligneRecherche {
+    display: flex;
+    flex-direction:row ;
+    margin-top: 20px;
+}
+
+#RechLEB, 
+#RechValideur,
+#RechFournisseur,
+#RechPON,
+#RechCriticite,
+#RechSemaine {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 40px; 
+}
+
+#inputLEB, 
+#inputValideur,
+#inputFournisseur,
+#inputPON,
+#inputCriticite,
+#inputSemaine {
+    border-radius: 5px;
+    border: 2px solid #FFDA00;
+    background-color: #FFF4BB;
+    color: #707173;
+}
+
+/*-------------------------------------------- Ligne tableau --------------------------------------------*/
+
+
+#Tableau {
+  margin-top: 50px;
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: fixed;
+  border: none; /* supprime contour du tableau */
+}
+
+#Tableau th,
+#Tableau td{
+  border: none; /* supprime toute bordure par défaut */
+  text-align: center;
+}
+
+/* En-tête : seule la bordure entre header et corps reste */
+
+#Tableau thead th {
+  padding: 10px;
+  text-align: center;
+  color: white;
+  border-bottom: 1px solid white; /* bordure épaisse */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background-color: #009EFF;
+
+}
+
+#Tableau tbody tr:nth-child(even) {
+  background-color: rgba(186, 229, 255, 0.5);
+}
+
+#Tableau tbody tr.bloquant {
+  background-color: #FFA995;
+}
+
+
+#btnValider,
+#btnEffacer {
+    color: white;
+    width: 80px;
+    padding: 5px 5px;
+    margin: 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    
+}
+
+#btnValider {
+    margin-left: 50px;
+    border: 2px solid #009EFF;
+    background-color: #5CC1FF;
+}
+
+#btnEffacer {
+    border : 2px solid #A1A1A1;
+    background-color: #C3C3C3;
+}

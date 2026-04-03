@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<!------------------------------------------------------------------->
+<!------------------------------------------------------------------->
+
+<head>
+  <meta charset="UTF-8">
+  <title>Prévisionnel Réception Ad'hoc</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+
+<!------------------------------------------------------------------->
+<!------------------------------------------------------------------->
+
+<body>
+
+<!---------------------------------------------------------------------->
+<!------------------------------Titre page------------------------------>
+<!---------------------------------------------------------------------->
+
+<div id="header">
+  <img src="logo.png" alt="Logo" id="logo">
+  <h1>Prévisionnel Réception Ad'hoc</h1>
+</div>
+
+<div id="secondeLigne"></div>
+
+<!---------------------------------------------------------------------->
+<!---------------------------Ligne rechercher--------------------------->
+<!---------------------------------------------------------------------->
+
+<div id ="ligneRecherche">
+    <p>Rechercher :</p>
+    <div id="RechLEB">
+        N° LEB
+        <input type="text" id="inputLEB">
+    </div>
+    <div id="RechCriticite">
+        Criticité 
+        <input type="text" id="inputCriticite">
+    </div>
+    <div id="RechValideur">
+        Valideur
+        <input type="text" id="inputValideur">
+    </div>
+    
+    <div id="RechPON">
+        N° PON
+        <input type="text" id="inputPON">
+    </div>
+    <div id="RechFournisseur">
+        Fournisseur
+        <input type="text" id="inputFournisseur">
+    </div>
+    
+    <div id="RechSemaine">
+        Semaine livraison
+        <input type="text" id="inputSemaine">
+    </div>
+    <input type="button" id="btnValider" value="Valider">      
+    <input type="button" id="btnEffacer" value="Effacer">
+    
+    
+</div>
+
+<!--------------------------------------------------------------------->
+<!----------------------------Ligne Tableau---------------------------->
+<!--------------------------------------------------------------------->
+
+<table id="Tableau" border="1" >
+    <thead>
+      <tr>
+        <th>EB</th>
+        <th>N° LEB</th>
+        <th>Criticité</th>
+        <th>Demandeur</th>
+        <th>Lieu de livraison</th>
+        <th>Livraison partielle</th>
+        <th>Quantité</th>
+        <th>N° PON</th>
+        <th>Fournisseur</th>
+        <th>Tracking</th>
+        <th>Délai prévu</th>
+      </tr>
+    </thead>
+    <tbody id="resultsTableau">
+      <!-- Les lignes seront ajoutées dynamiquement par JS -->
+    </tbody>
+  </table>
+
+<!------Liaison à JS à la fin parce que sinon JS connaitra pas toutes les variables------>
+
+<script src="script.js"></script>
+</body>
+
+
+
+</html>
