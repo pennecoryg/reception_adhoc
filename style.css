@@ -8,7 +8,6 @@ body {
   font-family: Calibri, sans-serif;
   color: #707173;
   width: 100%;
-  overflow-x: hidden;
 }
 
 label {
@@ -52,6 +51,7 @@ p {
 #contenu {
   width: 100%;
   box-sizing: border-box;
+  overflow-x: auto;
 }
 
 #ligneRecherche {
