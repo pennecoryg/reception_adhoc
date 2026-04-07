@@ -80,6 +80,7 @@ p {
     justify-content: space-between;
     align-items: flex-end;
     box-sizing: border-box;
+    gap: 15px;
 }
 
 #RechLEB, 
