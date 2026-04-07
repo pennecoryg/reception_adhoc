@@ -9,6 +9,7 @@ async function chargerDonnees() {
   try {
     const response = await fetch("dataLEB.json");
     const data = await response.json();
+    console.log(data); // <-- ajoute ça
 
     // CARTO
     data_LEB = data.LEB.map(row => {
