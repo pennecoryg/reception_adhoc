@@ -168,7 +168,7 @@ chargerDonnees().then(() => {
             <td>${row["Commentaires suivi"] || ""}</td>
             <td>${row["Fournisseur"] || ""}</td>
             <td>${row["N° de tracking"] || ""}</td>
-            <td>${excelDateVersDate(row["DATE REPORT DE DÉLAI"] || row["DATE PRÉVUE DE RÉCEPTION SELON ARC"]) || ""}</td>
+            <td>${excelDateVersDate(row["Date report de délai"] || row["Date prévue de réception selon ARC"]) || ""}</td>
         `;
         tbody.appendChild(tr);
     });
