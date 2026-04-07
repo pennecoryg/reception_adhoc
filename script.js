@@ -71,14 +71,26 @@ chargerDonnees().then(() => {
     remplirTableau();
   }
 
+  
+  function excelDateVersDate(serial) {
+    if (!serial) return "";
+    if (!isNaN(serial)) {
+        const date = new Date((Number(serial) - 25569) * 86400 * 1000);
+        return date.toLocaleDateString("fr-FR");
+    }
+    return serial;
+  }
 
 
+  
   // Fonction pour calculer le numéro de semaine en fonction d'une date 
   function getSemaineISO(dateStr) {
     if (!dateStr) return null;
-    // Gère le format DD/MM/YYYY
     let date;
-    if (dateStr.includes("/")) {
+    if (!isNaN(dateStr)) {
+        // Numéro série Excel
+        date = new Date((Number(dateStr) - 25569) * 86400 * 1000);
+    } else if (dateStr.includes("/")) {
         const [jour, mois, annee] = dateStr.split("/");
         date = new Date(Date.UTC(Number(annee), Number(mois) - 1, Number(jour)));
     } else {
@@ -156,7 +168,7 @@ chargerDonnees().then(() => {
             <td>${row["Commentaires suivi"] || ""}</td>
             <td>${row["Fournisseur"] || ""}</td>
             <td>${row["N° de tracking"] || ""}</td>
-            <td>${row["Date report de délai"] || row["Date prévue de réception selon ARC"] || ""}</td>
+            <td>${excelDateVersDate(row["DATE REPORT DE DÉLAI"] || row["DATE PRÉVUE DE RÉCEPTION SELON ARC"]) || ""}</td>
         `;
         tbody.appendChild(tr);
     });
