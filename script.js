@@ -110,7 +110,7 @@ chargerDonnees().then(() => {
     const correspondance = {
         LEB:         "Ligne d'expression du besoin",
         criticite:   "Priorité",
-        valideur:    "Valideur",
+        valideur:    "Valideur_x003a_ Nom complet",
         PON:         "Commentaires suivi",
         fournisseur: "Fournisseur",
         };
@@ -145,10 +145,10 @@ chargerDonnees().then(() => {
           tr.classList.add("bloquant");
         }
         tr.innerHTML = `
-            <td>${row["Expression du besoin: Expression du besoin"]|| ""}</td>
+            <td>${row["Expression du besoin_x003a_ Expression du besoin"]|| ""}</td>
             <td>${row["Ligne d'expression du besoin"] || ""}</td>
             <td>${row["Priorité"] || ""}</td>
-            <td>${row["Demandeur: Nom complet"] || ""}</td>
+            <td>${row["Demandeur_x003a_ Nom complet"] || ""}</td>
             <td>${row["Lieu de livraison du besoin"] || ""}</td>
             <td>${["1","1.0",1].includes(row["Livraison partielle souhaitée"]) ? "OUI" : ["0","0.0",0].includes(row["Livraison partielle souhaitée"]) ? "NON" : ""}</td>
             <td>${row["Quantité"] || ""}</td>
