@@ -89,7 +89,9 @@ chargerDonnees().then(() => {
     if (!serial) return "";
     if (!isNaN(serial)) {
         const date = new Date((Number(serial) - 25569) * 86400 * 1000);
-        return date.toLocaleDateString("fr-FR") + " " + date.toLocaleTimeString("fr-FR", {hour: "2-digit", minute: "2-digit"});
+        const heures = String(date.getUTCHours()).padStart(2, "0");
+        const minutes = String(date.getUTCMinutes()).padStart(2, "0");
+        return date.toLocaleDateString("fr-FR") + " " + heures + ":" + minutes;
     }
     return serial;
   }
