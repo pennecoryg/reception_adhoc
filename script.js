@@ -9,7 +9,8 @@ async function chargerDonnees() {
   try {
     const response = await fetch("dataLEB.json");
     const data = await response.json();
-    console.log(data); // <-- ajoute ça
+    console.log(data); 
+    
 
     // CARTO
     data_LEB = data.LEB.map(row => {
@@ -22,7 +23,9 @@ async function chargerDonnees() {
       });
       return obj;
     });
-
+    
+    console.log(Object.keys(data_LEB[0]))
+    
     data_LEBLoaded = true;
     console.log("Fichier LEB chargé :", data_LEB);
 
