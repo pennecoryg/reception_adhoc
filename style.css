@@ -1,86 +1,67 @@
-/* Il faut en fait prendre le nom de la balise du fichier html 
-pour laquelle tu veux que le style soit adopté. Donc toutes 
-les choses contenues dans cette balise auront ce style */
-
 body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px;
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
   font-family: Calibri, sans-serif;
-  color: #707173; 
+  color: #707173;
+  width: 100%;
+  overflow-x: hidden;
 }
-
-
-
-
-/* Masque à l'origine les 2 barres de recherche et après c'est géré 
-dans le js pour voir ce qu'on affiche en focntion du clique qui sera fait  */
-
-/* Le # cible un id précis. Si on avait mis u ne class toolbar déja ça aurait 
-été unique pour marque et fournisseur (car une class peut être utilisée par 
-plusieurs éléments) et on aurait mis un . au lieu du # */
-
 
 label {
   margin-right: 20px;
 }
 
-/* Conteneur des listes centré */
 p {
-  display: flex;             /* utilise flexbox pour alignement */
+  display: flex;
   font-size: 20px;
 }
 
-/*------------------------------------- Initialisation du style des ID -------------------------------------*/
-
 #header {
   display: flex;
-  align-items: center;      /* aligne verticalement logo + titre */
+  align-items: center;
   justify-content: flex-start;
   width: 100%;
-  padding: 10px 20px;
+  padding: 10px 20px 40px 20px;
   box-sizing: border-box;
-  border-bottom: 4px solid #A1A1A1 ;
-  padding-bottom: 40px;
+  border-bottom: 4px solid #A1A1A1;
 }
 
 #secondeLigne {
   width: 100%;
   height: 1px;
   background-color: #A1A1A1;
-  margin-top: 6px;                /* espace entre les deux lignes */
+  margin-top: 6px;
   margin-bottom: 20px;
 }
 
 #logo {
-  height: 50px;             /* ajuste la taille du logo */
-  margin-right: 40px;       /* espace entre logo et titre */
-  padding-right: 40px;                    /* espace avant la barre */
-  border-right: 2px solid #A1A1A1;        /* barre verticale fine */
+  height: 50px;
+  margin-right: 40px;
+  padding-right: 40px;
+  border-right: 2px solid #A1A1A1;
 }
 
 #header h1 {
-  margin: 0;                /* enlève la marge par défaut du h1 */
+  margin: 0;
 }
 
-/*-------------------------------------------- Ensemble tableau + ligne recherche --------------------------------------------*/
 #contenu {
-    width: 100%;
-    padding: 0 20px;
-    box-sizing: border-box;
+  width: 100%;
+  box-sizing: border-box;
 }
-/*-------------------------------------------- Ligne rechercher --------------------------------------------*/
 
 #ligneRecherche {
-    display: flex;
-    flex-direction: row;
-    margin-top: 20px;
-    width: 100%;
-    justify-content: space-between;
-    align-items: flex-end;
-    box-sizing: border-box;
-    gap: 15px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  width: 100%;
+  justify-content: space-between;
+  align-items: flex-end;
+  box-sizing: border-box;
 }
 
 #RechLEB, 
@@ -89,12 +70,10 @@ p {
 #RechPON,
 #RechCriticite,
 #RechSemaine {
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex: 1; 
-    max-width: 130px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
 }
 
 #inputLEB, 
@@ -103,44 +82,37 @@ p {
 #inputPON,
 #inputCriticite,
 #inputSemaine {
-    border-radius: 5px;
-    border: 2px solid #FFDA00;
-    background-color: #FFF4BB;
-    color: #707173;
+  border-radius: 5px;
+  border: 2px solid #FFDA00;
+  background-color: #FFF4BB;
+  color: #707173;
+  width: 90%;
+  box-sizing: border-box;
+  min-width: 0;
 }
 
-/*-------------------------------------------- Ligne tableau --------------------------------------------*/
-
-
 #Tableau {
-  margin-top: 50px;
+  margin-top: 30px;
   border-collapse: collapse;
   width: 100%;
   table-layout: auto;
-  border: none; /* supprime contour du tableau */
+  border: none;
 }
 
 #Tableau th,
-#Tableau td{
-  border: none; /* supprime toute bordure par défaut */
+#Tableau td {
+  border: none;
   text-align: center;
   padding: 8px;
   word-wrap: break-word;
-  max-width: 200px;
 }
-
-/* En-tête : seule la bordure entre header et corps reste */
 
 #Tableau thead th {
   padding: 10px;
   text-align: center;
   color: white;
-  border-bottom: 1px solid white; /* bordure épaisse */
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  border-bottom: 1px solid white;
   background-color: #009EFF;
-
 }
 
 #Tableau tbody tr:nth-child(even) {
@@ -151,26 +123,24 @@ p {
   background-color: #FFA995;
 }
 
-
 #btnValider,
 #btnEffacer {
-    color: white;
-    width: 80px;
-    padding: 5px 5px;
-    margin: 15px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    
+  color: white;
+  width: 80px;
+  padding: 5px;
+  margin: 5px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  white-space: nowrap;
 }
 
 #btnValider {
-    margin-left: 50px;
-    border: 2px solid #009EFF;
-    background-color: #5CC1FF;
+  border: 2px solid #009EFF;
+  background-color: #5CC1FF;
 }
 
 #btnEffacer {
-    border : 2px solid #A1A1A1;
-    background-color: #C3C3C3;
+  border: 2px solid #A1A1A1;
+  background-color: #C3C3C3;
 }
