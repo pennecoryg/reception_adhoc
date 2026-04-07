@@ -57,7 +57,22 @@ chargerDonnees().then(() => {
   //--------------------------------------Main-------------------------------------//
   //-------------------------------------------------------------------------------//
   remplirTableau();
-
+  const wrapper = document.getElementById("tableauWrapper");
+  const topScroll = document.createElement("div");
+  topScroll.style.overflowX = "auto";
+  topScroll.style.height = "12px";
+  const inner = document.createElement("div");
+  inner.style.height = "1px";
+  wrapper.parentNode.insertBefore(topScroll, wrapper);
+  
+  function syncWidth() {
+    inner.style.width = wrapper.scrollWidth + "px";
+  }
+  topScroll.appendChild(inner);
+  syncWidth();
+  
+  topScroll.addEventListener("scroll", () => wrapper.scrollLeft = topScroll.scrollLeft);
+  wrapper.addEventListener("scroll", () => topScroll.scrollLeft = wrapper.scrollLeft);
 
   btnEffacer.onclick = function () {
     inputLEB.value = "";
