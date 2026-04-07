@@ -85,6 +85,16 @@ chargerDonnees().then(() => {
   }
 
 
+  function excelDateHeureVersDate(serial) {
+    if (!serial) return "";
+    if (!isNaN(serial)) {
+        const date = new Date((Number(serial) - 25569) * 86400 * 1000);
+        return date.toLocaleDateString("fr-FR") + " " + date.toLocaleTimeString("fr-FR", {hour: "2-digit", minute: "2-digit"});
+    }
+    return serial;
+  }
+
+
   
   // Fonction pour calculer le numéro de semaine en fonction d'une date 
   function getSemaineISO(dateStr) {
@@ -161,7 +171,7 @@ chargerDonnees().then(() => {
           tr.classList.add("bloquant");
         }
         tr.innerHTML = `
-            <td>${excelDateVersDate(row["Expression du besoin_x003a_ Expression du besoin"])|| ""}</td>
+            <td>${excelDateHeureVersDate(row["Expression du besoin_x003a_ Expression du besoin"])|| ""}</td>
             <td>${row["Ligne d'expression du besoin"] || ""}</td>
             <td>${row["Priorité"] || ""}</td>
             <td>${row["Demandeur_x003a_ Nom complet"] || ""}</td>
