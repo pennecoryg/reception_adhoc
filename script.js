@@ -161,7 +161,7 @@ chargerDonnees().then(() => {
           tr.classList.add("bloquant");
         }
         tr.innerHTML = `
-            <td>${row["Expression du besoin_x003a_ Expression du besoin"]|| ""}</td>
+            <td>${excelDateVersDate(row["Expression du besoin_x003a_ Expression du besoin"])|| ""}</td>
             <td>${row["Ligne d'expression du besoin"] || ""}</td>
             <td>${row["Priorité"] || ""}</td>
             <td>${row["Demandeur_x003a_ Nom complet"] || ""}</td>
