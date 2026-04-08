@@ -40,29 +40,35 @@
       <p>Rechercher :</p>
       <div id="RechLEB">
           N° LEB
-          <input type="text" id="inputLEB">
+          <input type="text" id="inputLEB" list="LEBList" autocomplete="off">
+          <datalist id="LEBList"></datalist>
       </div>
       <div id="RechCriticite">
           Criticité 
-          <input type="text" id="inputCriticite">
+          <input type="text" id="inputCriticite" list="CriticiteList" autocomplete="off">
+          <datalist id="CriticiteList"></datalist>
       </div>
       <div id="RechValideur">
           Valideur
-          <input type="text" id="inputValideur">
+          <input type="text" id="inputValideur" list="ValideurList" autocomplete="off">
+          <datalist id="ValideurList"></datalist>
       </div>
       
       <div id="RechPON">
           N° PON
-          <input type="text" id="inputPON">
+          <input type="text" id="inputPON" list="PONList" autocomplete="off">
+          <datalist id="PONList"></datalist>
       </div>
       <div id="RechFournisseur">
           Fournisseur
-          <input type="text" id="inputFournisseur">
+          <input type="text" id="inputFournisseur" list="FournisseurList" autocomplete="off">
+          <datalist id="FournisseurList"></datalist>
       </div>
       
       <div id="RechSemaine">
           Semaine livraison
-          <input type="text" id="inputSemaine">
+          <input type="text" id="inputSemaine" list="SemaineList" autocomplete="off">
+          <datalist id="SemaineList"></datalist>
       </div>
       <input type="button" id="btnValider" value="Valider">      
       <input type="button" id="btnEffacer" value="Effacer">
