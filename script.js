@@ -11,16 +11,25 @@ async function chargerDonnees() {
     const data = await response.json();
     console.log(data); 
     
+    const colonnesMinuscules = ["N° de tracking"];
 
-    // CARTO
     data_LEB = data.LEB.map(row => {
       let obj = {};
+      
       Object.keys(row).forEach(key => {
-        obj[key.trim()] = String(row[key] || "")
+        const cleanKey = key.trim();
+        
+        let valeur = String(row[key] || "")
           .replace(/\r/g, "")
-          .trim()
-          .toUpperCase();
+          .trim();
+
+        if (!colonnesMinuscules.includes(cleanKey)) {
+          valeur = valeur.toUpperCase();
+        }
+
+        obj[cleanKey] = valeur;
       });
+
       return obj;
     });
     
