@@ -36,7 +36,68 @@ async function chargerDonnees() {
 
 chargerDonnees().then(() => {
 
+  // ✅ Maintenant les données sont chargées, on peut remplir les datalists
+  
+  // Remplir la liste des LEB
+  const LEB_disp = [...new Set(data_LEB.map(item => item["Ligne d'expression du besoin"]))].filter(m => m).sort();
+  const LEBDatalist = document.getElementById("LEBList");
+  LEB_disp.forEach(LEB => {
+    const option = document.createElement("option");
+    option.value = LEB;
+    LEBDatalist.appendChild(option);
+  });
 
+  // Remplir la liste des criticités
+  const criticite_disp = [...new Set(data_LEB.map(item => item["Priorité"]))].filter(m => m).sort();
+  const CriticiteDatalist = document.getElementById("CriticiteList");
+  criticite_disp.forEach(criticite => {
+    const option = document.createElement("option");
+    option.value = criticite;
+    CriticiteDatalist.appendChild(option);
+  });
+
+
+  // Remplir la liste des valideurs
+  const valideur_disp = [...new Set(data_LEB.map(item => item["Valideur_x003a_ Nom complet"]))].filter(m => m).sort();
+  const ValideurDatalist = document.getElementById("ValideurList");
+  valideur_disp.forEach(valideur => {
+    const option = document.createElement("option");
+    option.value = valideur;
+    ValideurDatalist.appendChild(option);
+  });
+
+
+  // Remplir la liste des PON
+  const PON_disp = [...new Set(data_LEB.map(item => item["Commentaires suivi"]))].filter(m => m).sort();
+  const PONDatalist = document.getElementById("PONList");
+  PON_disp.forEach(PON => {
+    const option = document.createElement("option");
+    option.value = PON;
+    PONDatalist.appendChild(option);
+  });
+  
+
+  // Remplir la liste des fournisseurs
+  const fournisseur_disp = [...new Set(data_LEB.map(item => item.Fournisseur))].filter(m => m).sort();
+  const FournisseurDatalist = document.getElementById("FournisseurList");
+  fournisseur_disp.forEach(fournisseur => {
+    const option = document.createElement("option");
+    option.value = fournisseur;
+    FournisseurDatalist.appendChild(option);
+  });
+
+
+  // Remplir la liste des semaines
+  const semaine_disp = [...new Set(data_LEB.map(row => {const dateUtilisee = row["Date report de délai"] || row["Date prévue de réception selon ARC"];return getSemaineISO(dateUtilisee);}))].filter(m => m).sort();
+  const SemaineDatalist = document.getElementById("SemaineList");
+  semaine_disp.forEach(semaine => {
+    const option = document.createElement("option");
+    option.value = semaine;
+    SemaineDatalist.appendChild(option);
+  });
+
+  
+  
 
   //--------------------------------------------------------------------------------//
   //------------------------------------Variables-----------------------------------//
@@ -68,10 +129,20 @@ chargerDonnees().then(() => {
     remplirTableau();
     }
 
-
-  btnValider.onclick = function () {
+  
+  function lancerRemplissage() {
     remplirTableau();
   }
+
+  // Première condition du lancement de remplissage de tableau avec bouton valider
+  btnValider.onclick = lancerRemplissage;
+
+
+  // Deuxième condition du lancement de remplissage de tableau avec touche entrer
+  [inputLEB, inputcriticite, inputvalideur, inputPON, inputfournisseur, inputsemaine].forEach(input => {
+    input.addEventListener("keydown", function (e) {if (e.key === "Enter") {lancerRemplissage();}
+    });
+  });
 
   
   function excelDateVersDate(serial) {
@@ -161,9 +232,19 @@ chargerDonnees().then(() => {
           const semaineLigne = getSemaineISO(dateUtilisee);
           return semaineLigne !== null && String(semaineLigne) === val;
         }
+        
         return row[correspondance[cle]]?.includes(val);
         });
+    })
+
+
+    // Tri de l'EB du plus vieux au plus récent 
+    .sort((a, b) => {
+    const dateA = excelDateHeureVersDate(a["Expression du besoin_x003a_ Expression du besoin"]);
+    const dateB = excelDateHeureVersDate(b["Expression du besoin_x003a_ Expression du besoin"]);
+    return dateA - dateB; // du plus vieux au plus récent
     });
+
 
     // Remplissage du tableau
     lignesFiltrees.forEach(row => {
@@ -176,12 +257,14 @@ chargerDonnees().then(() => {
             <td>${row["Ligne d'expression du besoin"] || ""}</td>
             <td>${row["Priorité"] || ""}</td>
             <td>${row["Demandeur_x003a_ Nom complet"] || ""}</td>
-            <td>${row["Lieu de livraison du besoin"] || ""}</td>
+            <td>${row["Lieu de livraison du besoin"].split("PL-AH_")[1] || ""}</td>
             <td>${["1","1.0",1].includes(row["Livraison partielle souhaitée"]) ? "OUI" : ["0","0.0",0].includes(row["Livraison partielle souhaitée"]) ? "NON" : ""}</td>
             <td>${row["Quantité"] || ""}</td>
             <td>${row["Commentaires suivi"] || ""}</td>
             <td>${row["Fournisseur"] || ""}</td>
-            <td>${row["N° de tracking"] || ""}</td>
+            <td>
+              ${row["N° de tracking"] ? `<a href="${row["N° de tracking"]}" target="_blank">${row["N° de tracking"]}</a>` : ""}
+            </td>
             <td>${excelDateVersDate(row["Date report de délai"] || row["Date prévue de réception selon ARC"]) || ""}</td>
         `;
         tbody.appendChild(tr);
@@ -192,3 +275,4 @@ chargerDonnees().then(() => {
 
 
 })
+
