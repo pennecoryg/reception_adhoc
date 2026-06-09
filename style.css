@@ -17,6 +17,7 @@ label {
 p {
   display: flex;
   font-size: 20px;
+  font-weight: bold;
 }
 
 #header {
@@ -76,6 +77,14 @@ p {
   flex: 1;
 }
 
+#RechLEB label { color: #009EFF; font-weight: bold; }
+#RechValideur label      { color: #00EC00; font-weight: bold; }
+#RechFournisseur label     { color: #FF785A; font-weight: bold; }
+#RechPON label      { color: #FFDA00; font-weight: bold; }
+#RechCriticite label      { color: #FF3E61; font-weight: bold; }
+#RechSemaine label      { color: #A1A1A1; font-weight: bold; }
+
+
 #inputLEB, 
 #inputValideur,
 #inputFournisseur,
@@ -83,8 +92,8 @@ p {
 #inputCriticite,
 #inputSemaine {
   border-radius: 5px;
-  border: 2px solid #FFDA00;
-  background-color: #FFF4BB;
+  border: 2px solid #C3C3C3;
+  background-color: #E6E6E6;
   color: #707173;
   width: 90%;
   box-sizing: border-box;
@@ -116,18 +125,25 @@ p {
   word-wrap: break-word;
 }
 
+#Tableau thead {
+  position: sticky;
+  top: 0;
+  box-shadow: 0 2px 0 #C3C3C3;
+}
+
+
 #Tableau thead th {
   position: sticky;
   top: 0;
   padding: 10px;
   text-align: center;
-  color: white;
-  border-bottom: 1px solid white;
-  background-color: #009EFF;
+  color: #707173;
+  background-color: white;
+  white-space: nowrap;
 }
 
 #Tableau tbody tr:nth-child(even) {
-  background-color: rgba(186, 229, 255, 0.5);
+  background-color: #E6E6E6;
 }
 
 #Tableau tbody tr.bloquant {
@@ -147,8 +163,8 @@ p {
 }
 
 #btnValider {
-  border: 2px solid #009EFF;
-  background-color: #5CC1FF;
+  border: 2px solid #00EC00;
+  background-color: #5BF25B;
 }
 
 #btnEffacer {
