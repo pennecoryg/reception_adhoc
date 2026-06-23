@@ -125,6 +125,14 @@ p {
   word-wrap: break-word;
 }
 
+#resultsTableau td:nth-child(13),
+#resultsTableau th:nth-child(13) {
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 #Tableau thead {
   position: sticky;
   top: 0;
