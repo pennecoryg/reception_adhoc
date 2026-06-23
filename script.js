@@ -11,7 +11,7 @@ async function chargerDonnees() {
     const data = await response.json();
     console.log(data); 
     
-    const colonnesMinuscules = ["N° de tracking"];
+    const colonnesMinuscules = ["N° de tracking", "Désignation", "Référence"];
 
     data_LEB = data.LEB.map(row => {
       let obj = {};
@@ -271,10 +271,12 @@ chargerDonnees().then(() => {
             <td>${row["Quantité"] || ""}</td>
             <td>${row["Commentaires suivi"] || ""}</td>
             <td>${row["Fournisseur"] || ""}</td>
+            <td>${excelDateVersDate(row["Date report de délai"] || row["Date prévue de réception selon ARC"]) || ""}</td>
+            <td>${row["Référence"] || ""}</td>
+            <td>${row["Désignation"] || ""}</td>
             <td>
               ${row["N° de tracking"] ? `<a href="${row["N° de tracking"]}" target="_blank">${row["N° de tracking"]}</a>` : ""}
             </td>
-            <td>${excelDateVersDate(row["Date report de délai"] || row["Date prévue de réception selon ARC"]) || ""}</td>
         `;
         tbody.appendChild(tr);
     });
