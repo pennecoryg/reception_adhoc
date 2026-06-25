@@ -65,11 +65,13 @@ p {
   box-sizing: border-box;
 }
 
+#RechEB,
 #RechLEB, 
-#RechValideur,
-#RechFournisseur,
-#RechPON,
+#RechStatut,
 #RechCriticite,
+#RechValideur,
+#RechPON,
+#RechFournisseur,
 #RechSemaine {
   display: flex;
   flex-direction: column;
@@ -77,19 +79,23 @@ p {
   flex: 1;
 }
 
-#RechLEB label { color: #009EFF; font-weight: bold; }
-#RechValideur label      { color: #00EC00; font-weight: bold; }
-#RechFournisseur label     { color: #FF785A; font-weight: bold; }
-#RechPON label      { color: #FFDA00; font-weight: bold; }
-#RechCriticite label      { color: #FF3E61; font-weight: bold; }
-#RechSemaine label      { color: #A1A1A1; font-weight: bold; }
+#RechEB label {color: #009EFF; font-weight: bold; }
+#RechLEB label { color: #FF3E61; font-weight: bold;}
+#RechStatut label {  color: #00EC00; font-weight: bold; }
+#RechCriticite label      { color: #FF785A; font-weight: bold;  }
+#RechValideur label      {color: #FFDA00; font-weight: bold;}
+#RechPON label      {color: #009EFF; font-weight: bold; }
+#RechFournisseur label     { color: #FF3E61; font-weight: bold; }
+#RechSemaine label      {color: #00EC00; font-weight: bold;  }
 
 
+#inputEB,
 #inputLEB, 
-#inputValideur,
-#inputFournisseur,
-#inputPON,
+#inputStatut,
 #inputCriticite,
+#inputValideur,
+#inputPON,
+#inputFournisseur,
 #inputSemaine {
   border-radius: 5px;
   border: 2px solid #C3C3C3;
@@ -125,8 +131,8 @@ p {
   word-wrap: break-word;
 }
 
-#resultsTableau td:nth-child(13),
-#resultsTableau th:nth-child(13) {
+#resultsTableau td:nth-child(15),
+#resultsTableau th:nth-child(15) {
   max-width: 300px;
   overflow: hidden;
   text-overflow: ellipsis;
