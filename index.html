@@ -38,11 +38,25 @@
   
   <div id ="ligneRecherche">
       <p>Rechercher :</p>
+      <div id="RechEB">
+          <label>
+          EB
+          <input type="text" id="inputEB" list="EBList" autocomplete="off">
+          <datalist id="EBList"></datalist>
+          </label>
+      </div>
       <div id="RechLEB">
           <label>
           N° LEB
           <input type="text" id="inputLEB" list="LEBList" autocomplete="off">
           <datalist id="LEBList"></datalist>
+          </label>
+      </div>
+      <div id="RechStatut">
+          <label>
+          Statut
+          <input type="text" id="inputStatut" list="StatutList" autocomplete="off">
+          <datalist id="StatutList"></datalist>
           </label>
       </div>
       <div id="RechCriticite">
@@ -96,7 +110,9 @@
       <thead>
         <tr>
           <th>EB</th>
+          <th>Nb LEB cloturées dans EB</th>
           <th>N° LEB</th>
+          <th>Statut</th>
           <th>Criticité</th>
           <th>Demandeur</th>
           <th>Lieu de livraison</th>
