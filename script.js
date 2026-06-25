@@ -47,63 +47,7 @@ chargerDonnees().then(() => {
 
   // ✅ Maintenant les données sont chargées, on peut remplir les datalists
   
-  // Remplir la liste des LEB
-  const LEB_disp = [...new Set(data_LEB.map(item => item["Ligne d'expression du besoin"]))].filter(m => m).sort();
-  const LEBDatalist = document.getElementById("LEBList");
-  LEB_disp.forEach(LEB => {
-    const option = document.createElement("option");
-    option.value = LEB;
-    LEBDatalist.appendChild(option);
-  });
-
-  // Remplir la liste des criticités
-  const criticite_disp = [...new Set(data_LEB.map(item => item["Priorité"]))].filter(m => m).sort();
-  const CriticiteDatalist = document.getElementById("CriticiteList");
-  criticite_disp.forEach(criticite => {
-    const option = document.createElement("option");
-    option.value = criticite;
-    CriticiteDatalist.appendChild(option);
-  });
-
-
-  // Remplir la liste des valideurs
-  const valideur_disp = [...new Set(data_LEB.map(item => item["Valideur_x003a_ Nom complet"]))].filter(m => m).sort();
-  const ValideurDatalist = document.getElementById("ValideurList");
-  valideur_disp.forEach(valideur => {
-    const option = document.createElement("option");
-    option.value = valideur;
-    ValideurDatalist.appendChild(option);
-  });
-
-
-  // Remplir la liste des PON
-  const PON_disp = [...new Set(data_LEB.map(item => item["Commentaires suivi"]))].filter(m => m).sort();
-  const PONDatalist = document.getElementById("PONList");
-  PON_disp.forEach(PON => {
-    const option = document.createElement("option");
-    option.value = PON;
-    PONDatalist.appendChild(option);
-  });
   
-
-  // Remplir la liste des fournisseurs
-  const fournisseur_disp = [...new Set(data_LEB.map(item => item.Fournisseur))].filter(m => m).sort();
-  const FournisseurDatalist = document.getElementById("FournisseurList");
-  fournisseur_disp.forEach(fournisseur => {
-    const option = document.createElement("option");
-    option.value = fournisseur;
-    FournisseurDatalist.appendChild(option);
-  });
-
-
-  // Remplir la liste des semaines
-  const semaine_disp = [...new Set(data_LEB.map(row => {const dateUtilisee = row["Date report de délai"] || row["Date prévue de réception selon ARC"];return getSemaineISO(dateUtilisee);}))].filter(m => m).sort();
-  const SemaineDatalist = document.getElementById("SemaineList");
-  semaine_disp.forEach(semaine => {
-    const option = document.createElement("option");
-    option.value = semaine;
-    SemaineDatalist.appendChild(option);
-  });
 
   
   
@@ -113,7 +57,9 @@ chargerDonnees().then(() => {
   //--------------------------------------------------------------------------------//
 
   // On récupère les éléments HTML par leur ID
+  const inputEB = document.getElementById("inputEB");
   const inputLEB = document.getElementById("inputLEB");
+  const inputStatut = document.getElementById("inputStatut");
   const inputcriticite = document.getElementById("inputCriticite");
   const inputvalideur = document.getElementById("inputValideur");
   const inputPON = document.getElementById("inputPON");
@@ -126,10 +72,34 @@ chargerDonnees().then(() => {
   //-------------------------------------------------------------------------------//
   //--------------------------------------Main-------------------------------------//
   //-------------------------------------------------------------------------------//
+
+  // Ajout de l'info nb LEB cloturées dans EB pour chaque ligne
+
+  for (const row of data_LEB) {
+    const eb = row["Expression du besoin_x003a_ Expression du besoin"];
+
+    const groupe = data_LEB.filter(
+        r => r["Expression du besoin_x003a_ Expression du besoin"] === eb
+    );
+
+    const total = groupe.length;
+
+    const cloturees = groupe.filter(
+        r => r["Statut client"] === "CLÔTURÉ"
+    ).length;
+
+    row["nb LEB cloturées dans EB"] = `${cloturees}/${total}`;
+  }
+
+
+      
+
   remplirTableau();
   
   btnEffacer.onclick = function () {
+    inputEB.value = "";
     inputLEB.value = "";
+    inputStatut.value = "";
     inputcriticite.value = "";
     inputvalideur.value = "";
     inputPON.value = "";
@@ -148,10 +118,99 @@ chargerDonnees().then(() => {
 
 
   // Deuxième condition du lancement de remplissage de tableau avec touche entrer
-  [inputLEB, inputcriticite, inputvalideur, inputPON, inputfournisseur, inputsemaine].forEach(input => {
+  [inputEB, inputLEB, inputStatut, inputcriticite, inputvalideur, inputPON, inputfournisseur, inputsemaine].forEach(input => {
     input.addEventListener("keydown", function (e) {if (e.key === "Enter") {lancerRemplissage();}
     });
   });
+
+
+  function mettreAJourDatalist(lignes) {
+    // Remplir la liste des EB
+    const EB_disp = [...new Set(lignes.map(item => excelDateHeureVersDate(item["Expression du besoin_x003a_ Expression du besoin"])))].filter(m => m).sort();
+    const EBDatalist = document.getElementById("EBList");
+    EBDatalist.innerHTML = "";
+    EB_disp.forEach(EB => {
+      const option = document.createElement("option");
+      option.value = EB;
+      EBDatalist.appendChild(option);
+    });
+
+
+    // Remplir la liste des LEB
+    const LEB_disp = [...new Set(lignes.map(item => item["Ligne d'expression du besoin"]))].filter(m => m).sort();
+    const LEBDatalist = document.getElementById("LEBList");
+    LEBDatalist.innerHTML = "";
+    LEB_disp.forEach(LEB => {
+      const option = document.createElement("option");
+      option.value = LEB;
+      LEBDatalist.appendChild(option);
+    });
+
+    // Remplir la liste des statuts
+    const statut_disp = [...new Set(lignes.map(item => item["Statut client"]))].filter(m => m).sort();
+    const StatutDatalist = document.getElementById("StatutList");
+    StatutDatalist.innerHTML = "";
+    statut_disp.forEach(criticite => {
+      const option = document.createElement("option");
+      option.value = criticite;
+      StatutDatalist.appendChild(option);
+    });
+
+    // Remplir la liste des criticités
+    const criticite_disp = [...new Set(lignes.map(item => item["Priorité"]))].filter(m => m).sort();
+    const CriticiteDatalist = document.getElementById("CriticiteList");
+    CriticiteDatalist.innerHTML = "";
+    criticite_disp.forEach(criticite => {
+      const option = document.createElement("option");
+      option.value = criticite;
+      CriticiteDatalist.appendChild(option);
+    });
+
+
+    // Remplir la liste des valideurs
+    const valideur_disp = [...new Set(lignes.map(item => item["Valideur_x003a_ Nom complet"]))].filter(m => m).sort();
+    const ValideurDatalist = document.getElementById("ValideurList");
+    ValideurDatalist.innerHTML = "";
+    valideur_disp.forEach(valideur => {
+      const option = document.createElement("option");
+      option.value = valideur;
+      ValideurDatalist.appendChild(option);
+    });
+
+
+    // Remplir la liste des PON
+    const PON_disp = [...new Set(lignes.map(item => item["Commentaires suivi"]))].filter(m => m).sort();
+    const PONDatalist = document.getElementById("PONList");
+    PONDatalist.innerHTML = "";
+    PON_disp.forEach(PON => {
+      const option = document.createElement("option");
+      option.value = PON;
+      PONDatalist.appendChild(option);
+    });
+    
+
+    // Remplir la liste des fournisseurs
+    const fournisseur_disp = [...new Set(lignes.map(item => item.Fournisseur))].filter(m => m).sort();
+    const FournisseurDatalist = document.getElementById("FournisseurList");
+    FournisseurDatalist.innerHTML = "";
+    fournisseur_disp.forEach(fournisseur => {
+      const option = document.createElement("option");
+      option.value = fournisseur;
+      FournisseurDatalist.appendChild(option);
+    });
+
+
+    // Remplir la liste des semaines
+    const semaine_disp = [...new Set(lignes.map(row => {const dateUtilisee = row["Date report de délai"] || row["Date prévue de réception selon ARC"];return getSemaineISO(dateUtilisee);}))].filter(m => m).sort();
+    const SemaineDatalist = document.getElementById("SemaineList");
+    SemaineDatalist.innerHTML = "";
+    semaine_disp.forEach(semaine => {
+      const option = document.createElement("option");
+      option.value = semaine;
+      SemaineDatalist.appendChild(option);
+    });
+
+  }
 
   
   function excelDateVersDate(serial) {
@@ -205,7 +264,9 @@ chargerDonnees().then(() => {
     tbody.innerHTML = "";
 
     const valeursRenseignees = {
+        EB:          inputEB.value.trim().toUpperCase(),
         LEB:         inputLEB.value.trim().toUpperCase(),
+        Statut:      inputStatut.value.trim().toUpperCase(),
         criticite:   inputcriticite.value.trim().toUpperCase(),
         valideur:    inputvalideur.value.trim().toUpperCase(),
         PON:         inputPON.value.trim().toUpperCase(),
@@ -215,7 +276,9 @@ chargerDonnees().then(() => {
 
     // Correspondance entre les clés et les colonnes du JSON
     const correspondance = {
+        EB:          "Expression du besoin_x003a_ Expression du besoin",
         LEB:         "Ligne d'expression du besoin",
+        Statut:      "Statut client",
         criticite:   "Priorité",
         valideur:    "Valideur_x003a_ Nom complet",
         PON:         "Commentaires suivi",
@@ -226,6 +289,11 @@ chargerDonnees().then(() => {
     const lignesFiltrees = data_LEB.filter(row => {
         return Object.entries(valeursRenseignees).every(([cle, val]) => {
         if (!val) return true;
+        if (cle === "EB") {
+          const valeurLigneEB = row[correspondance[cle]] || "";
+          const dateLigneEB = excelDateHeureVersDate(valeurLigneEB);
+          return dateLigneEB !== null && String(dateLigneEB) === val;
+        }
         if (cle === "LEB") {
           const valeurLigneLEB = row[correspondance[cle]] || "";
           const partieAprestiret = valeurLigneLEB.split("LEB-")[1] || "";
@@ -249,11 +317,13 @@ chargerDonnees().then(() => {
 
     // Tri de l'EB du plus vieux au plus récent 
     .sort((a, b) => {
-    const dateA = excelDateHeureVersDate(a["Expression du besoin_x003a_ Expression du besoin"]);
-    const dateB = excelDateHeureVersDate(b["Expression du besoin_x003a_ Expression du besoin"]);
+    const dateA = a["Expression du besoin_x003a_ Expression du besoin"];
+    const dateB = b["Expression du besoin_x003a_ Expression du besoin"];
     return dateA - dateB; // du plus vieux au plus récent
     });
 
+    // Mettre à jour les datalists APRÈS le filtrage
+    mettreAJourDatalist(lignesFiltrees);
 
     // Remplissage du tableau
     lignesFiltrees.forEach(row => {
@@ -263,7 +333,9 @@ chargerDonnees().then(() => {
         }
         tr.innerHTML = `
             <td>${excelDateHeureVersDate(row["Expression du besoin_x003a_ Expression du besoin"])|| ""}</td>
+            <td>${row["nb LEB cloturées dans EB"] || ""}</td>
             <td>${row["Ligne d'expression du besoin"] || ""}</td>
+            <td>${row["Statut client"] || ""}</td>
             <td>${row["Priorité"] || ""}</td>
             <td>${row["Demandeur_x003a_ Nom complet"] || ""}</td>
             <td>${row["Lieu de livraison du besoin"].split("PL-AH_")[1] || ""}</td>
