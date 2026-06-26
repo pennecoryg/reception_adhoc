@@ -67,6 +67,7 @@ chargerDonnees().then(() => {
   const inputsemaine = document.getElementById("inputSemaine");
   const btnValider = document.getElementById("btnValider")
   const btnEffacer = document.getElementById("btnEffacer")
+  const checkCloturees = document.getElementById("checkCloturees");
 
 
   //-------------------------------------------------------------------------------//
@@ -91,10 +92,33 @@ chargerDonnees().then(() => {
     row["nb LEB cloturées dans EB"] = `${cloturees}/${total}`;
   }
 
+  // On supprime les EB entièrement clôturées
+  
+  data_LEB = data_LEB.filter(row => {
+      const [cloturees, total] = row["nb LEB cloturées dans EB"]
+          .split("/")
+          .map(Number);
 
-      
+      return cloturees !== total;
+  });
 
-  remplirTableau();
+  // /!\/!\/!\/!\/!\/!\/!\/!\ PRISE EN COMPTE OU NON DES LIGNES AVEC LEB CLOTUREES/!\/!\/!\/!\/!\/!\/!\/!\ 
+  function getDataFiltree() {                                                   ///!\/!\/!\/!\/!\/!\/!\/!\
+    if (checkCloturees.checked) {                                               ///!\/!\/!\/!\/!\/!\/!\/!\
+      return data_LEB;                                                          ///!\/!\/!\/!\/!\/!\/!\/!\
+    }                                                                           ///!\/!\/!\/!\/!\/!\/!\/!\
+                                                                                ///!\/!\/!\/!\/!\/!\/!\/!\
+    return data_LEB.filter(                                                     ///!\/!\/!\/!\/!\/!\/!\/!\
+      row => row["Statut client"] !== "CLÔTURÉ"                                 ///!\/!\/!\/!\/!\/!\/!\/!\
+    );                                                                          ///!\/!\/!\/!\/!\/!\/!\/!\
+  }                                                                             ///!\/!\/!\/!\/!\/!\/!\/!\
+                                                                                ///!\/!\/!\/!\/!\/!\/!\/!\
+  // /!\/!\/!\/!\/!\/!\/!\/!\ PRISE EN COMPTE OU NON DES LIGNES AVEC LEB CLOTUREES/!\/!\/!\/!\/!\/!\/!\/!\    
+  function lancerRemplissage() {
+    remplirTableau();
+  }
+
+  lancerRemplissage();
   
   btnEffacer.onclick = function () {
     inputEB.value = "";
@@ -105,13 +129,14 @@ chargerDonnees().then(() => {
     inputPON.value = "";
     inputfournisseur.value = "";
     inputsemaine.value = "";
-    remplirTableau();
+    lancerRemplissage();
     }
 
-  
-  function lancerRemplissage() {
-    remplirTableau();
+  checkCloturees.onchange =  function () {
+    lancerRemplissage();
   }
+
+
 
   // Première condition du lancement de remplissage de tableau avec bouton valider
   btnValider.onclick = lancerRemplissage;
@@ -260,6 +285,7 @@ chargerDonnees().then(() => {
 
 
   function remplirTableau() {
+    let data_to_take = getDataFiltree();  
     const tbody = document.getElementById("resultsTableau");
     tbody.innerHTML = "";
 
@@ -286,7 +312,7 @@ chargerDonnees().then(() => {
         };
 
     // Filtrage
-    const lignesFiltrees = data_LEB.filter(row => {
+    const lignesFiltrees = data_to_take.filter(row => {    // /!\ ATTENTION : Ici on ne prend plus Data_LEB mais data_to_take 
         return Object.entries(valeursRenseignees).every(([cle, val]) => {
         if (!val) return true;
         if (cle === "EB") {
