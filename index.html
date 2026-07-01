@@ -75,13 +75,7 @@
           <datalist id="CriticiteList"></datalist>
           </label>
       </div>
-      <div id="RechValideur">
-          <label>
-          Valideur
-          <input type="text" id="inputValideur" list="ValideurList" autocomplete="off">
-          <datalist id="ValideurList"></datalist>
-          </label>
-      </div>
+      
       
       <div id="RechPON">
           <label>
@@ -105,6 +99,13 @@
           <datalist id="SemaineList"></datalist>
           </label>
       </div>
+      <div id="RechValideur">
+          <label>
+          Valideur
+          <input type="text" id="inputValideur" list="ValideurList" autocomplete="off">
+          <datalist id="ValideurList"></datalist>
+          </label>
+      </div>
       <input type="button" id="btnValider" value="Valider">      
       <input type="button" id="btnEffacer" value="Effacer">
       
@@ -118,21 +119,36 @@
   <table id="Tableau" border="1" >
       <thead>
         <tr>
+          <th colspan="7">
+            <img src="icône-rouage-ORYGAMY.png" alt="icône-rouage-ORYGAMY" class="icone-titre">
+            EXPRESSION DE BESOIN
+          </th>
+          <th colspan="4">
+            <img src="e-shop-ORYGAMY.png" alt="e-shop-ORYGAMY" class="icone-titre">
+            ACHATS
+          </th>
+          <th colspan="4">
+            <img src="Camion-ORYGAMY.png" alt="Camion-ORYGAMY" class="icone-titre">
+            LOGISTIQUE
+          </th>
+        </tr>
+        <tr>
           <th>EB</th>
-          <th>Nb LEB cloturées dans EB</th>
           <th>N° LEB</th>
           <th>Statut</th>
           <th>Criticité</th>
-          <th>Demandeur</th>
-          <th>Lieu de livraison</th>
-          <th>Livraison partielle</th>
           <th>Quantité</th>
+          <th>Référence</th>
+          <th>Description du besoin</th>
           <th>N° UFN</th>
           <th>Fournisseur</th>
           <th>Délai prévu</th>
-          <th>Référence</th>
-          <th>Description du besoin</th>
           <th>Tracking</th>
+          <th>Demandeur</th>
+          <th>Lieu de livraison</th>
+          <th>Livraison partielle</th>
+          <th>Nb LEB cloturées dans EB</th>
+          
         </tr>
       </thead>
       <tbody id="resultsTableau">
