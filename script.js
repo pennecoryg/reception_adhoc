@@ -31,7 +31,7 @@ async function chargerDonnees() {
       });
 
       return obj;
-    });
+    }).filter(row => row["Ligne d'expression du besoin"]);
     
     console.log(Object.keys(data_LEB[0]))
     
@@ -359,22 +359,23 @@ chargerDonnees().then(() => {
         }
         tr.innerHTML = `
             <td>${excelDateHeureVersDate(row["Expression du besoin_x003a_ Expression du besoin"])|| ""}</td>
-            <td>${row["nb LEB cloturées dans EB"] || ""}</td>
             <td>${row["Ligne d'expression du besoin"] || ""}</td>
             <td>${row["Statut client"] || ""}</td>
             <td>${row["Priorité"] || ""}</td>
-            <td>${row["Demandeur_x003a_ Nom complet"] || ""}</td>
-            <td>${row["Lieu de livraison du besoin"].split("PL-AH_")[1] || ""}</td>
-            <td>${["1","1.0",1].includes(row["Livraison partielle souhaitée"]) ? "OUI" : ["0","0.0",0].includes(row["Livraison partielle souhaitée"]) ? "NON" : ""}</td>
             <td>${row["Quantité"] || ""}</td>
+            <td>${row["Référence"] || ""}</td>
+            <td>${row["Désignation"] || ""}</td>
             <td>${row["Commentaires suivi"] || ""}</td>
             <td>${row["Fournisseur"] || ""}</td>
             <td>${excelDateVersDate(row["Date report de délai"] || row["Date prévue de réception selon ARC"]) || ""}</td>
-            <td>${row["Référence"] || ""}</td>
-            <td>${row["Désignation"] || ""}</td>
             <td>
               ${row["N° de tracking"] ? `<a href="${row["N° de tracking"]}" target="_blank">${row["N° de tracking"]}</a>` : ""}
             </td>
+            <td>${row["Demandeur_x003a_ Nom complet"] || ""}</td>
+            <td>${row["Lieu de livraison du besoin"].split("PL-AH_")[1] || ""}</td>
+            <td>${["1","1.0",1].includes(row["Livraison partielle souhaitée"]) ? "OUI" : ["0","0.0",0].includes(row["Livraison partielle souhaitée"]) ? "NON" : ""}</td>
+            <td>${row["nb LEB cloturées dans EB"] || ""}</td>
+            
         `;
         tbody.appendChild(tr);
     });
