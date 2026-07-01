@@ -55,7 +55,7 @@ p {
   
 }
 
-
+/* ===============================Ligne des filtres=============================== */
 
 #ligneRecherche {
   display: flex;
@@ -89,7 +89,7 @@ p {
   align-items: center;
   gap: 6px;
   font-weight: bold;
-  color: #00EC00;
+  color: #FFC000;
   position: absolute;  /* ← sort du flux */
   top: 100%;           /* ← se place juste sous le div */
   margin-top: 4px;
@@ -108,14 +108,14 @@ p {
   flex: 1;
 }
 
-#RechEB label {color: #009EFF; font-weight: bold; }
-#RechLEB label { color: #FF3E61; font-weight: bold;}
-#RechStatut label {  color: #00EC00; font-weight: bold; }
-#RechCriticite label      { color: #FF785A; font-weight: bold;  }
-#RechValideur label      {color: #FFDA00; font-weight: bold;}
+#RechEB label {color: #FFC000; font-weight: bold; }
+#RechLEB label { color: #FFC000; font-weight: bold;}
+#RechStatut label {  color: #FFC000; font-weight: bold; }
+#RechCriticite label      { color: #FFC000; font-weight: bold;  }
 #RechPON label      {color: #009EFF; font-weight: bold; }
-#RechFournisseur label     { color: #FF3E61; font-weight: bold; }
-#RechSemaine label      {color: #00EC00; font-weight: bold;  }
+#RechFournisseur label     { color: #009EFF; font-weight: bold; }
+#RechSemaine label      {color: #009EFF; font-weight: bold;  }
+#RechValideur label      {color: #FF785A; font-weight: bold;}
 
 
 #inputEB,
@@ -134,6 +134,30 @@ p {
   box-sizing: border-box;
   min-width: 0;
 }
+
+#btnValider,
+#btnEffacer {
+  color: white;
+  width: 80px;
+  padding: 5px;
+  margin: 5px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+#btnValider {
+  border: 2px solid #00EC00;
+  background-color: #5BF25B;
+}
+
+#btnEffacer {
+  border: 2px solid #A1A1A1;
+  background-color: #C3C3C3;
+}
+
+/* ===============================Mise en forme tableau=============================== */
 
 #Tableau {
   
@@ -160,17 +184,28 @@ p {
   word-wrap: break-word;
 }
 
-#resultsTableau td:nth-child(15),
-#resultsTableau th:nth-child(15) {
+#resultsTableau td:nth-child(11),
+#resultsTableau th:nth-child(11) {
   max-width: 300px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-#resultsTableau td:nth-child(7),
-#resultsTableau th:nth-child(7) {
+#resultsTableau td:nth-child(13),
+#resultsTableau th:nth-child(13),
+#resultsTableau td:nth-child(6),
+#resultsTableau th:nth-child(6){
   max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  word-break: break-all;
+}
+
+#resultsTableau td:nth-child(7),
+#resultsTableau th:nth-child(7){
+  max-width: 250px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: normal;
@@ -183,7 +218,47 @@ p {
   box-shadow: 0 2px 0 #C3C3C3;
 }
 
+#Tableau thead tr:first-child th {
+  top: 0;
+}
 
+#Tableau thead tr:last-child th {
+  top: 30px; /* hauteur de la première ligne*/
+}
+
+/* ----------------Couleur des colonnes---------------- */
+
+#Tableau thead tr:first-child th:nth-child(1) {
+  color: #FFC000;
+  background-color: white;
+}
+
+#Tableau thead tr:last-child th:nth-child(-n+7) {
+  color: #FFC000;
+  background-color: white;
+}
+
+#Tableau thead tr:first-child th:nth-child(2) {
+  color: #009EFF;
+  background-color: white;
+}
+
+#Tableau thead tr:last-child th:nth-child(n+8):nth-child(-n+11) {
+  color: #009EFF;
+  background-color: white;
+}
+
+#Tableau thead tr:first-child th:nth-child(3) {
+  color: #FF785A;
+  background-color: white;
+}
+
+#Tableau thead tr:last-child th:nth-child(n+12) {
+  color: #FF785A;
+  background-color: white;
+}
+
+/* ----------------Couleur du corps du tableau---------------- */
 #Tableau thead th {
   position: sticky;
   top: 0;
@@ -202,24 +277,55 @@ p {
   background-color: #FFA995;
 }
 
-#btnValider,
-#btnEffacer {
-  color: white;
-  width: 80px;
-  padding: 5px;
-  margin: 5px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  white-space: nowrap;
+/* --------------------Bordures autour de colonne Achats-------------------- */
+
+/* Ligne 1 d'en-tête : haut + gauche/droite du bloc du milieu */
+#Tableau thead tr:first-child th:nth-child(2) {
+  box-shadow: inset 0 1px 0 #C3C3C3, inset 1px 0 0 #C3C3C3, inset -1px 0 0 #C3C3C3;
 }
 
-#btnValider {
-  border: 2px solid #00EC00;
-  background-color: #5BF25B;
+/* Ligne 2 d'en-tête : gauche/droite du bloc du milieu */
+#Tableau thead tr:last-child th:nth-child(8) {
+  box-shadow: inset 1px 0 0 #C3C3C3;
 }
 
-#btnEffacer {
-  border: 2px solid #A1A1A1;
-  background-color: #C3C3C3;
+#Tableau thead tr:last-child th:nth-child(11) {
+  box-shadow: inset -1px 0 0 #C3C3C3;
 }
+
+/* Corps du tableau : gauche/droite du bloc du milieu */
+#Tableau tbody td:nth-child(8) {
+  box-shadow: inset 1px 0 0 #C3C3C3;
+}
+
+#Tableau tbody td:nth-child(11) {
+  box-shadow: inset -1px 0 0 #C3C3C3;
+}
+
+/* Dernière ligne du corps : ajoute la bordure du bas sur le bloc du milieu */
+#Tableau tbody tr:last-child td:nth-child(8) {
+  box-shadow: inset 1px 0 0 #C3C3C3, inset 0 -1px 0 #C3C3C3;
+}
+
+#Tableau tbody tr:last-child td:nth-child(9),
+#Tableau tbody tr:last-child td:nth-child(10) {
+  box-shadow: inset 0 -1px 0 #C3C3C3;
+}
+
+#Tableau tbody tr:last-child td:nth-child(11) {
+  box-shadow: inset -1px 0 0 #C3C3C3, inset 0 -1px 0 #C3C3C3;
+}
+
+/* --------------------Police du texte des en têtes-------------------- */
+#Tableau thead tr:first-child th{
+  font-size: 30px;
+}
+
+.icone-titre {
+  height: 20px;
+  width: auto;
+}
+
+
+
+
