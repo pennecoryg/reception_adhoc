@@ -61,6 +61,8 @@ chargerDonnees().then(() => {
   const inputLEB = document.getElementById("inputLEB");
   const inputStatut = document.getElementById("inputStatut");
   const inputcriticite = document.getElementById("inputCriticite");
+  const inputRef = document.getElementById("inputRef");
+  const inputDescri = document.getElementById("inputDescri");
   const inputvalideur = document.getElementById("inputValideur");
   const inputPON = document.getElementById("inputPON");
   const inputfournisseur = document.getElementById("inputFournisseur");
@@ -125,6 +127,8 @@ chargerDonnees().then(() => {
     inputLEB.value = "";
     inputStatut.value = "";
     inputcriticite.value = "";
+    inputRef.value = "";
+    inputDescri.value = "";
     inputvalideur.value = "";
     inputPON.value = "";
     inputfournisseur.value = "";
@@ -143,7 +147,7 @@ chargerDonnees().then(() => {
 
 
   // Deuxième condition du lancement de remplissage de tableau avec touche entrer
-  [inputEB, inputLEB, inputStatut, inputcriticite, inputvalideur, inputPON, inputfournisseur, inputsemaine].forEach(input => {
+  [inputEB, inputLEB, inputStatut, inputcriticite, inputRef, inputDescri, inputvalideur, inputPON, inputfournisseur, inputsemaine].forEach(input => {
     input.addEventListener("keydown", function (e) {if (e.key === "Enter") {lancerRemplissage();}
     });
   });
@@ -189,6 +193,26 @@ chargerDonnees().then(() => {
       const option = document.createElement("option");
       option.value = criticite;
       CriticiteDatalist.appendChild(option);
+    });
+
+    // Remplir la liste des références
+    const Ref_disp = [...new Set(lignes.map(item => item["Référence"]))].filter(m => m).sort();
+    const RefDatalist = document.getElementById("RefList");
+    RefDatalist.innerHTML = "";
+    Ref_disp.forEach(Ref => {
+      const option = document.createElement("option");
+      option.value = Ref;
+      RefDatalist.appendChild(option);
+    });
+
+    // Remplir la liste des descriptions du besoin
+    const Descri_disp = [...new Set(lignes.map(item => item["Désignation"]))].filter(m => m).sort();
+    const DescriDatalist = document.getElementById("DescriList");
+    DescriDatalist.innerHTML = "";
+    Descri_disp.forEach(Descri => {
+      const option = document.createElement("option");
+      option.value = Descri;
+      DescriDatalist.appendChild(option);
     });
 
 
@@ -294,6 +318,8 @@ chargerDonnees().then(() => {
         LEB:         inputLEB.value.trim().toUpperCase(),
         Statut:      inputStatut.value.trim().toUpperCase(),
         criticite:   inputcriticite.value.trim().toUpperCase(),
+        Ref:         inputRef.value.trim().toUpperCase(),
+        Descri:      inputDescri.value.trim().toUpperCase(),
         valideur:    inputvalideur.value.trim().toUpperCase(),
         PON:         inputPON.value.trim().toUpperCase(),
         fournisseur: inputfournisseur.value.trim().toUpperCase(),
@@ -306,6 +332,8 @@ chargerDonnees().then(() => {
         LEB:         "Ligne d'expression du besoin",
         Statut:      "Statut client",
         criticite:   "Priorité",
+        Ref:         "Référence",
+        Descri:      "Description",
         valideur:    "Valideur_x003a_ Nom complet",
         PON:         "Commentaires suivi",
         fournisseur: "Fournisseur",
