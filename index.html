@@ -38,9 +38,9 @@
   <!---------------------------------------------------------------------->
   <!---------------------------Ligne rechercher--------------------------->
   <!---------------------------------------------------------------------->
-  
-  <div id ="ligneRecherche">
-      <p>Rechercher :</p>
+  <p>Rechercher :</p>
+  <div id ="ligneRecherche1">
+      
       <div id="RechEB">
           <label>
           EB
@@ -75,7 +75,24 @@
           <datalist id="CriticiteList"></datalist>
           </label>
       </div>
-      
+
+      <div id="RechRef">
+          <label>
+          Référence
+          <input type="text" id="inputRef" list="RefList" autocomplete="off">
+          <datalist id="RefList"></datalist>
+          </label>
+      </div>
+
+      <div id="RechDescri">
+          <label>
+          Description du besoin
+          <input type="text" id="inputDescri" list="DescriList" autocomplete="off">
+          <datalist id="DescriList"></datalist>
+          </label>
+      </div>
+  </div>
+  <div id ="ligneRecherche2">   
       
       <div id="RechPON">
           <label>
@@ -106,11 +123,12 @@
           <datalist id="ValideurList"></datalist>
           </label>
       </div>
+  </div>
       <input type="button" id="btnValider" value="Valider">      
       <input type="button" id="btnEffacer" value="Effacer">
       
       
-  </div>
+  
   
   <!--------------------------------------------------------------------->
   <!----------------------------Ligne Tableau---------------------------->
