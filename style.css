@@ -35,7 +35,7 @@ p {
   height: 1px;
   background-color: #A1A1A1;
   margin-top: 6px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 #logo {
@@ -57,14 +57,33 @@ p {
 
 /* ===============================Ligne des filtres=============================== */
 
-#ligneRecherche {
-  display: flex;
-  flex-direction: row;
-  margin-top: 20px;
+#ligneRecherche1,
+#ligneRecherche2 {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  column-gap: 60px;
+  align-items: end;      /* remplace align-items: flex-end */
   width: 100%;
-  justify-content: space-between;
-  align-items: flex-end;
   box-sizing: border-box;
+}
+
+#ligneRecherche1 label,
+#ligneRecherche2 label {
+  width: 100%;
+  margin-right: 0;   /* annule le margin-right: 20px du sélecteur global */
+}
+
+/* la case à cocher reste hors de ce calcul */
+#RechStatut label:last-child {
+  width: auto;
+}
+
+#ligneRecherche1 {
+  margin-bottom: 40px;
+}
+
+#ligneRecherche2 {
+  margin-bottom: 10px;
 }
 
 #RechStatut {
@@ -87,7 +106,7 @@ p {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 6px;
+  column-gap: 20px;
   font-weight: bold;
   color: #FFC000;
   position: absolute;  /* ← sort du flux */
@@ -98,20 +117,28 @@ p {
 #RechEB,
 #RechLEB, 
 #RechCriticite,
+#RechRef,
+#RechDescri,
 #RechValideur,
 #RechPON,
 #RechFournisseur,
 #RechSemaine {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   flex: 1;
+}
+
+#RechValideur {
+  grid-column: 5;
 }
 
 #RechEB label {color: #FFC000; font-weight: bold; }
 #RechLEB label { color: #FFC000; font-weight: bold;}
 #RechStatut label {  color: #FFC000; font-weight: bold; }
 #RechCriticite label      { color: #FFC000; font-weight: bold;  }
+#RechRef label      { color: #FFC000; font-weight: bold;  }
+#RechDescri label      { color: #FFC000; font-weight: bold;  }
 #RechPON label      {color: #009EFF; font-weight: bold; }
 #RechFournisseur label     { color: #009EFF; font-weight: bold; }
 #RechSemaine label      {color: #009EFF; font-weight: bold;  }
@@ -122,6 +149,8 @@ p {
 #inputLEB, 
 #inputStatut,
 #inputCriticite,
+#inputRef,
+#inputDescri,
 #inputValideur,
 #inputPON,
 #inputFournisseur,
@@ -130,7 +159,7 @@ p {
   border: 2px solid #C3C3C3;
   background-color: #E6E6E6;
   color: #707173;
-  width: 90%;
+  width: 100%;
   box-sizing: border-box;
   min-width: 0;
 }
