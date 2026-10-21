@@ -67,6 +67,7 @@ chargerDonnees().then(() => {
   const inputPON = document.getElementById("inputPON");
   const inputfournisseur = document.getElementById("inputFournisseur");
   const inputsemaine = document.getElementById("inputSemaine");
+  const inputTypo = document.getElementById("inputTypo");
   const btnValider = document.getElementById("btnValider")
   const btnEffacer = document.getElementById("btnEffacer")
   const checkCloturees = document.getElementById("checkCloturees");
@@ -133,6 +134,7 @@ chargerDonnees().then(() => {
     inputPON.value = "";
     inputfournisseur.value = "";
     inputsemaine.value = "";
+    inputTypo.value = "";
     lancerRemplissage();
     }
 
@@ -147,7 +149,7 @@ chargerDonnees().then(() => {
 
 
   // Deuxième condition du lancement de remplissage de tableau avec touche entrer
-  [inputEB, inputLEB, inputStatut, inputcriticite, inputRef, inputDescri, inputvalideur, inputPON, inputfournisseur, inputsemaine].forEach(input => {
+  [inputEB, inputLEB, inputStatut, inputcriticite, inputRef, inputDescri, inputvalideur, inputPON, inputfournisseur, inputsemaine, inputTypo].forEach(input => {
     input.addEventListener("keydown", function (e) {if (e.key === "Enter") {lancerRemplissage();}
     });
   });
@@ -259,6 +261,17 @@ chargerDonnees().then(() => {
       SemaineDatalist.appendChild(option);
     });
 
+
+    // Remplir la liste des typos
+    const Typo_disp = [...new Set(lignes.map(item => item["Typologie achat"]))].filter(m => m).sort();
+    const TypoDatalist = document.getElementById("TypoList");
+    TypoDatalist.innerHTML = "";
+    Typo_disp.forEach(Typo => {
+      const option = document.createElement("option");
+      option.value = Typo;
+      TypoDatalist.appendChild(option);
+    });
+
   }
 
   
@@ -324,6 +337,7 @@ chargerDonnees().then(() => {
         PON:         inputPON.value.trim().toUpperCase(),
         fournisseur: inputfournisseur.value.trim().toUpperCase(),
         semaine:     inputsemaine.value.trim().toUpperCase(),
+        Typo:        inputTypo.value.trim().toUpperCase(),
     };
 
     // Correspondance entre les clés et les colonnes du JSON
@@ -337,6 +351,7 @@ chargerDonnees().then(() => {
         valideur:    "Valideur_x003a_ Nom complet",
         PON:         "Commentaires suivi",
         fournisseur: "Fournisseur",
+        Typo:        "Typologie achat",
         };
 
     // Filtrage
