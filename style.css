@@ -122,7 +122,8 @@ p {
 #RechValideur,
 #RechPON,
 #RechFournisseur,
-#RechSemaine {
+#RechSemaine,
+#RechTypo {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -143,6 +144,7 @@ p {
 #RechFournisseur label     { color: #009EFF; font-weight: bold; }
 #RechSemaine label      {color: #009EFF; font-weight: bold;  }
 #RechValideur label      {color: #FF785A; font-weight: bold;}
+#RechTypo label      {color: #FF785A; font-weight: bold;}
 
 
 #inputEB,
@@ -154,6 +156,7 @@ p {
 #inputValideur,
 #inputPON,
 #inputFournisseur,
+#inputTypo,
 #inputSemaine {
   border-radius: 5px;
   border: 2px solid #C3C3C3;
