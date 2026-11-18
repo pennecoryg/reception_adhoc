@@ -416,7 +416,7 @@ chargerDonnees().then(() => {
             </td>
             <td>${row["Demandeur_x003a_ Nom complet"] || ""}</td>
             <td>${row["Lieu de livraison du besoin"].split("PL-AH_")[1] || ""}</td>
-            <td>${["1","1.0",1].includes(row["Livraison partielle souhaitée"]) ? "OUI" : ["0","0.0",0].includes(row["Livraison partielle souhaitée"]) ? "NON" : ""}</td>
+            <td>${["1","1.0",1].includes(row["Livraison complète souhaitée"]) ? "OUI" : ["0","0.0",0].includes(row["Livraison complète souhaitée"]) ? "NON" : ""}</td>
             <td>${row["Destinataire"] || ""}</td>
             <td>${row["nb LEB cloturées dans EB"] || ""}</td>
             
